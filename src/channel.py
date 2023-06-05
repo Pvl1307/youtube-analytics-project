@@ -28,11 +28,33 @@ class Channel:
         self.video_count = statistics.get('videoCount')
         self.view_count = statistics.get('viewCount')
 
+    def __str__(self):
+        return f'{self.title} ({self.url})'
+
+    def __add__(self, other):
+        return int(self.subscribe_count) + int(other.subscribe_count)
+
+    def __sub__(self, other):
+        return int(self.subscribe_count) - int(other.subscribe_count)
+
+    def __gt__(self, other):
+        return int(self.subscribe_count) > int(other.subscribe_count)
+
+    def __ge__(self, other):
+        return int(self.subscribe_count) >= int(other.subscribe_count)
+
+    def __le__(self, other):
+        return int(self.subscribe_count) <= int(other.subscribe_count)
+
+    def __lt__(self, other):
+        return int(self.subscribe_count) < int(other.subscribe_count)
+
+    def __eq__(self, other):
+        return int(self.subscribe_count) == int(other.subscribe_count)
 
     @property
     def channel_id(self):
         return self.__channel_id
-
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
@@ -44,7 +66,6 @@ class Channel:
     def get_service(cls):
         """Возвращает объект для работы с YouTube API"""
         return build('youtube', 'v3', developerKey=cls.api_key)
-
 
     def to_json(self, filename):
         """Сохраняет значения атрибутов экземпляра Channel в файл в формате JSON"""
