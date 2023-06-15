@@ -17,6 +17,7 @@ class Video:
         self.view_count: int = video_response['items'][0]['statistics']['viewCount']
         self.like_count: int = video_response['items'][0]['statistics']['likeCount']
         self.comment_count: int = video_response['items'][0]['statistics']['commentCount']
+        self.video_url: str = f'https://youtu.be/{self.__video_id}'
 
     def __str__(self):
         return f'{self.video_title}'
